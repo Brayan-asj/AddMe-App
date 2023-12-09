@@ -4,7 +4,6 @@ import 'package:agenda/screens/categoria_contacto.dart';
 import 'package:agenda/screens/chat_screen.dart';
 import 'package:agenda/screens/contact_register.dart';
 import 'package:agenda/screens/galeria_screen.dart';
-import 'package:agenda/screens/llamada_screen.dart';
 import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -359,12 +358,7 @@ class _ContactDetailsPageState extends State<_ContactDetailsPage> {
       floatingActionButton: FloatingActionButton.extended(
         label: const Text('Llamar'),
         icon: const Icon(Icons.call),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const LlamadaScreen()),
-          );
-        },
+        onPressed: () {},
       ),
     );
   }

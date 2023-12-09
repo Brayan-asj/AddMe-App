@@ -1,102 +1,130 @@
-import 'package:agenda/screens/categoria_contacto.dart';
 import 'package:flutter/material.dart';
 
-class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController nameController = TextEditingController();
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _PantallaAgregarContactoState createState() =>
+      _PantallaAgregarContactoState();
+}
+
+class _PantallaAgregarContactoState extends State<RegisterPage> {
+  TextEditingController nombreController = TextEditingController();
+  TextEditingController telefonoController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController mobileController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+  TextEditingController domicilioController = TextEditingController();
+
+  limpiarCampos() {
+    nombreController.clear();
+    telefonoController.clear();
+    emailController.clear();
+    domicilioController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agregar Contacto'),
+        title: const Text('Nuevo Contacto'),
+        centerTitle: true,
+        backgroundColor: const Color.fromRGBO(145, 200, 228, 1.0),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
-      body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              const Text('Nombre (s):'),
-              const SizedBox(
-                height: 5,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextFormField(
+              controller: nombreController,
+              decoration: InputDecoration(
+                labelText: 'Nombre',
+                hintText: 'Ingresa el nombre',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 16.0, horizontal: 12.0),
+                prefixIcon: const Icon(Icons.person),
               ),
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+            ),
+            const SizedBox(height: 16),
+            TextFormField(
+              controller: telefonoController,
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                labelText: 'Teléfono',
+                hintText: 'Ingresa el número de teléfono',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 16.0, horizontal: 12.0),
+                prefixIcon: const Icon(Icons.phone),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextFormField(
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: 'Correo Electrónico',
+                hintText: 'Ingresa el correo electrónico',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 16.0, horizontal: 12.0),
+                prefixIcon: const Icon(Icons.email),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextFormField(
+              controller: domicilioController,
+              decoration: InputDecoration(
+                labelText: 'Domicilio',
+                hintText: 'Ingresa el domicilio',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 16.0, horizontal: 12.0),
+                prefixIcon: const Icon(Icons.home),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                limpiarCampos();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromRGBO(51, 130, 214, 1.0),
+                padding: const EdgeInsets.all(16.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text('Correo Electronico:'),
-              const SizedBox(
-                height: 5,
-              ),
-              TextField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text('Número Celular:'),
-              const SizedBox(
-                height: 5,
-              ),
-              TextField(
-                controller: mobileController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text('Domicilio'),
-              const SizedBox(
-                height: 5,
-              ),
-              TextField(
-                controller: addressController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CategoriaContact(
-                                title: 'Categoria de Contactos',
-                              )));
-                },
-                child: const Text(
-                  'Register',
-                  style: TextStyle(
-                    fontSize: 30,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.person_add, size: 24),
+                  SizedBox(width: 8),
+                  Text(
+                    'Agregar',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
-}
-
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
-
-  @override
-  State<RegisterPage> createState() => _RegisterPageState();
 }
